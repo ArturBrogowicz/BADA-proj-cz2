@@ -9,6 +9,7 @@ public class BeautySal00nApplication {
     public static void main(String[] args) {
         SpringApplication.run(BeautySal00nApplication.class, args);
         System.out.println("elomelo320");
+
     }
 
 }
