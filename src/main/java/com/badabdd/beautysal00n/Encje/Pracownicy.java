@@ -6,17 +6,15 @@ import java.util.Set;
 
 @Entity
 public class Pracownicy {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String imie;
-    private String nazwisko;
-    private String stanowisko;
-
     @Id
     @Column(name = "ID_PRACOWNIKA", nullable = false)
-    private Long id1;
+    private Long id;
+
+    @Column(name = "IMIE", nullable = false, length = 20)
+    private String imie;
+
+    @Column(name = "NAZWISKO", nullable = false, length = 20)
+    private String nazwisko;
 
     @Column(name = "PESEL", length = 11)
     private String pesel;
@@ -109,21 +107,12 @@ public class Pracownicy {
         this.pesel = pesel;
     }
 
-    public Long getId1() {
-        return id1;
+    public String getNazwisko() {
+        return nazwisko;
     }
 
-    public void setId1(Long id1) {
-        this.id1 = id1;
-    }
-
-    // Gettery i settery
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setNazwisko(String nazwisko) {
+        this.nazwisko = nazwisko;
     }
 
     public String getImie() {
@@ -134,20 +123,11 @@ public class Pracownicy {
         this.imie = imie;
     }
 
-    public String getNazwisko() {
-        return nazwisko;
+    public Long getId() {
+        return id;
     }
 
-    public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
-    }
-
-    public String getStanowisko() {
-        return stanowisko;
-    }
-
-    public void setStanowisko(String stanowisko) {
-        this.stanowisko = stanowisko;
+    public void setId(Long id) {
+        this.id = id;
     }
 }
-

@@ -11,6 +11,7 @@ public class ZakupyProduktow {
     @JoinColumn(name = "ID_PRACOWNIKA")
     private Pracownicy idPracownika;
 
+    @Id
     @Column(name = "ID_ZAKUPU", nullable = false)
     private Long idZakupu;
 

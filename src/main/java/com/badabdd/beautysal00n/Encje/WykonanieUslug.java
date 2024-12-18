@@ -11,6 +11,7 @@ public class WykonanieUslug {
     @JoinColumn(name = "ID_KLIENTA")
     private Klienci idKlienta;
 
+    @Id
     @Column(name = "ID_WYKONANIA", nullable = false)
     private Long idWykonania;
 
