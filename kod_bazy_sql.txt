@@ -251,6 +251,12 @@ CREATE INDEX IX_data_zakupy_produktow ON Zakupy_Produktow (data)
 TABLESPACE SYSTEM
 /
 
+-- Add keys for table Zakupy_Produktow
+
+ALTER TABLE Zakupy_Produktow ADD CONSTRAINT id_zakupu PRIMARY KEY (id_zakupu)
+   USING INDEX TABLESPACE SYSTEM
+/
+
 -- Table Wykorzystane_Narzedzia
 
 CREATE TABLE Wykorzystane_Narzedzia(
@@ -258,6 +264,12 @@ CREATE TABLE Wykorzystane_Narzedzia(
   id_narzedzia Integer NOT NULL
 )
 TABLESPACE SYSTEM
+/
+
+-- Add keys for table Wykorzystane_Narzedzia
+
+ALTER TABLE Wykorzystane_Narzedzia ADD CONSTRAINT id_wykorzystania PRIMARY KEY (id_uslugi, id_narzedzia)
+   USING INDEX TABLESPACE SYSTEM
 /
 
 -- Table Wykonanie_Uslug
@@ -285,6 +297,12 @@ TABLESPACE SYSTEM
 
 CREATE INDEX IX_data_wykonanie_uslug ON Wykonanie_Uslug (data)
 TABLESPACE SYSTEM
+/
+
+-- Add keys for table Wykonanie_Uslug
+
+ALTER TABLE Wykonanie_Uslug ADD CONSTRAINT id_wykonania PRIMARY KEY (id_wykonania)
+   USING INDEX TABLESPACE SYSTEM
 /
 
 -- Table Adresy
