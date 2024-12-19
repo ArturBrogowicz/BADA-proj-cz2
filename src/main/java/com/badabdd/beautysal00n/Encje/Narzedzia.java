@@ -26,15 +26,18 @@ public class Narzedzia {
     @Column(name = "OPIS", nullable = false, length = 500)
     private String opis;
 
-    @OneToMany(mappedBy = "idNarzedzia")
-    private Set<WykorzystaneNarzedzia> wykorzystaneNarzedzias = new LinkedHashSet<>();
+    @ManyToMany
+    @JoinTable(name = "WYKORZYSTANE_NARZEDZIA",
+            joinColumns = @JoinColumn(name = "ID_NARZEDZIA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_USLUGI"))
+    private Set<Uslugi> uslugis = new LinkedHashSet<>();
 
-    public Set<WykorzystaneNarzedzia> getWykorzystaneNarzedzias() {
-        return wykorzystaneNarzedzias;
+    public Set<Uslugi> getUslugis() {
+        return uslugis;
     }
 
-    public void setWykorzystaneNarzedzias(Set<WykorzystaneNarzedzia> wykorzystaneNarzedzias) {
-        this.wykorzystaneNarzedzias = wykorzystaneNarzedzias;
+    public void setUslugis(Set<Uslugi> uslugis) {
+        this.uslugis = uslugis;
     }
 
     public String getOpis() {

@@ -38,6 +38,17 @@ public class Klienci {
     @OneToMany(mappedBy = "idKlienta")
     private Set<WykonanieUslug> wykonanieUslugs = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "idKlienta")
+    private Set<ZakupyProduktow> zakupyProduktows = new LinkedHashSet<>();
+
+    public Set<ZakupyProduktow> getZakupyProduktows() {
+        return zakupyProduktows;
+    }
+
+    public void setZakupyProduktows(Set<ZakupyProduktow> zakupyProduktows) {
+        this.zakupyProduktows = zakupyProduktows;
+    }
+
     public Set<WykonanieUslug> getWykonanieUslugs() {
         return wykonanieUslugs;
     }

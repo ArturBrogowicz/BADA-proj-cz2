@@ -93,20 +93,20 @@ public class Salony {
         this.nazwa = nazwa;
     }
 
-    public Adresy getIdAdresu() {
-        return idAdresu;
-    }
-
-    public void setIdAdresu(Adresy idAdresu) {
-        this.idAdresu = idAdresu;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Adresy getIdAdresu() {
+        return idAdresu;
+    }
+
+    public void setIdAdresu(Adresy idAdresu) {
+        this.idAdresu = idAdresu;
     }
 
 }

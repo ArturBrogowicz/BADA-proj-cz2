@@ -1,14 +1,20 @@
 package com.badabdd.beautysal00n.Encje;
+
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "PRACOWNICY")
 public class Pracownicy {
     @Id
     @Column(name = "ID_PRACOWNIKA", nullable = false)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_ADRESU")
+    private Adresy idAdresu;
 
     @Column(name = "IMIE", nullable = false, length = 20)
     private String imie;
@@ -30,15 +36,17 @@ public class Pracownicy {
     @JoinColumn(name = "ID_MODELU", nullable = false)
     private ModelePracy idModelu;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ID_ADRESU", nullable = false)
-    private Adresy idAdresu;
-
     @OneToMany(mappedBy = "idPracownika")
     private Set<OcenyKlientow> ocenyKlientows = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idPracownika")
     private Set<RezerwacjeUslugerow> rezerwacjeUslugerows = new LinkedHashSet<>();
+
+    @OneToOne(mappedBy = "pracownicy")
+    private Sprzedawcy sprzedawcy;
+
+    @OneToMany(mappedBy = "idPracownika")
+    private Set<WykonanieUslug> wykonanieUslugs = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idPracownika")
     private Set<ZakupyProduktow> zakupyProduktows = new LinkedHashSet<>();
@@ -49,6 +57,22 @@ public class Pracownicy {
 
     public void setZakupyProduktows(Set<ZakupyProduktow> zakupyProduktows) {
         this.zakupyProduktows = zakupyProduktows;
+    }
+
+    public Set<WykonanieUslug> getWykonanieUslugs() {
+        return wykonanieUslugs;
+    }
+
+    public void setWykonanieUslugs(Set<WykonanieUslug> wykonanieUslugs) {
+        this.wykonanieUslugs = wykonanieUslugs;
+    }
+
+    public Sprzedawcy getSprzedawcy() {
+        return sprzedawcy;
+    }
+
+    public void setSprzedawcy(Sprzedawcy sprzedawcy) {
+        this.sprzedawcy = sprzedawcy;
     }
 
     public Set<RezerwacjeUslugerow> getRezerwacjeUslugerows() {
@@ -65,14 +89,6 @@ public class Pracownicy {
 
     public void setOcenyKlientows(Set<OcenyKlientow> ocenyKlientows) {
         this.ocenyKlientows = ocenyKlientows;
-    }
-
-    public Adresy getIdAdresu() {
-        return idAdresu;
-    }
-
-    public void setIdAdresu(Adresy idAdresu) {
-        this.idAdresu = idAdresu;
     }
 
     public ModelePracy getIdModelu() {
@@ -130,4 +146,13 @@ public class Pracownicy {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Adresy getIdAdresu() {
+        return idAdresu;
+    }
+
+    public void setIdAdresu(Adresy idAdresu) {
+        this.idAdresu = idAdresu;
+    }
+
 }

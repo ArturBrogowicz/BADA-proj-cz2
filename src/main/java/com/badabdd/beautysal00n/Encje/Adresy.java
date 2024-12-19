@@ -1,12 +1,14 @@
 package com.badabdd.beautysal00n.Encje;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "ADRESY")
 public class Adresy {
     @Id
     @Column(name = "ID_ADRESU", nullable = false)
@@ -118,5 +120,4 @@ public class Adresy {
     public void setId(Long id) {
         this.id = id;
     }
-
 }

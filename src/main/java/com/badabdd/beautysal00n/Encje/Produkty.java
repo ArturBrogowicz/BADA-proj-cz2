@@ -3,6 +3,8 @@ package com.badabdd.beautysal00n.Encje;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "PRODUKTY")
@@ -33,6 +35,17 @@ public class Produkty {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ID_PRODUCENTA", nullable = false)
     private Producenci idProducenta;
+
+    @OneToMany(mappedBy = "idProduktu")
+    private Set<ZakupyProduktow> zakupyProduktows = new LinkedHashSet<>();
+
+    public Set<ZakupyProduktow> getZakupyProduktows() {
+        return zakupyProduktows;
+    }
+
+    public void setZakupyProduktows(Set<ZakupyProduktow> zakupyProduktows) {
+        this.zakupyProduktows = zakupyProduktows;
+    }
 
     public Producenci getIdProducenta() {
         return idProducenta;

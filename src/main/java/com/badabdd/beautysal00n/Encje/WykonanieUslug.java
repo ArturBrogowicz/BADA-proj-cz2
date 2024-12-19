@@ -7,41 +7,27 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "WYKONANIE_USLUG")
 public class WykonanieUslug {
+    @Id
+    @Column(name = "ID_WYKONANIA", nullable = false)
+    private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_KLIENTA")
     private Klienci idKlienta;
 
-    @Id
-    @Column(name = "ID_WYKONANIA", nullable = false)
-    private Long idWykonania;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PRACOWNIKA")
+    private Pracownicy idPracownika;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_USLUGI")
+    private Uslugi idUslugi;
 
     @Column(name = "\"DATA\"", nullable = false)
     private LocalDate data;
 
     @Column(name = "CZAS_TRWANIA")
     private Long czasTrwania;
-
-    @Column(name = "ID_USLUGI", nullable = false)
-    private Long idUslugi;
-
-    @Column(name = "ID_PRACOWNIKA")
-    private Long idPracownika;
-
-    public Long getIdPracownika() {
-        return idPracownika;
-    }
-
-    public void setIdPracownika(Long idPracownika) {
-        this.idPracownika = idPracownika;
-    }
-
-    public Long getIdUslugi() {
-        return idUslugi;
-    }
-
-    public void setIdUslugi(Long idUslugi) {
-        this.idUslugi = idUslugi;
-    }
 
     public Long getCzasTrwania() {
         return czasTrwania;
@@ -59,12 +45,28 @@ public class WykonanieUslug {
         this.data = data;
     }
 
-    public Long getIdWykonania() {
-        return idWykonania;
+    public Uslugi getIdUslugi() {
+        return idUslugi;
     }
 
-    public void setIdWykonania(Long idWykonania) {
-        this.idWykonania = idWykonania;
+    public void setIdUslugi(Uslugi idUslugi) {
+        this.idUslugi = idUslugi;
+    }
+
+    public Pracownicy getIdPracownika() {
+        return idPracownika;
+    }
+
+    public void setIdPracownika(Pracownicy idPracownika) {
+        this.idPracownika = idPracownika;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Klienci getIdKlienta() {

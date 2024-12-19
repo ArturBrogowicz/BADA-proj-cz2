@@ -3,6 +3,8 @@ package com.badabdd.beautysal00n.Encje;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USLUGI")
@@ -26,6 +28,28 @@ public class Uslugi {
 
     @Column(name = "CZY_OFEROWANA", nullable = false)
     private Boolean czyOferowana = false;
+
+    @OneToMany(mappedBy = "idUslugi")
+    private Set<WykonanieUslug> wykonanieUslugs = new LinkedHashSet<>();
+
+    @ManyToMany(mappedBy = "uslugis")
+    private Set<Narzedzia> narzedzias = new LinkedHashSet<>();
+
+    public Set<Narzedzia> getNarzedzias() {
+        return narzedzias;
+    }
+
+    public void setNarzedzias(Set<Narzedzia> narzedzias) {
+        this.narzedzias = narzedzias;
+    }
+
+    public Set<WykonanieUslug> getWykonanieUslugs() {
+        return wykonanieUslugs;
+    }
+
+    public void setWykonanieUslugs(Set<WykonanieUslug> wykonanieUslugs) {
+        this.wykonanieUslugs = wykonanieUslugs;
+    }
 
     public Boolean getCzyOferowana() {
         return czyOferowana;

@@ -7,41 +7,27 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "ZAKUPY_PRODUKTOW")
 public class ZakupyProduktow {
+    @Id
+    @Column(name = "ID_ZAKUPU", nullable = false)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_KLIENTA")
+    private Klienci idKlienta;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PRACOWNIKA")
     private Pracownicy idPracownika;
 
-    @Id
-    @Column(name = "ID_ZAKUPU", nullable = false)
-    private Long idZakupu;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PRODUKTU")
+    private Produkty idProduktu;
 
     @Column(name = "\"DATA\"", nullable = false)
     private LocalDate data;
 
     @Column(name = "CZY_DOSTAWA", nullable = false)
     private Boolean czyDostawa = false;
-
-    @Column(name = "ID_KLIENTA", nullable = false)
-    private Long idKlienta;
-
-    @Column(name = "ID_PRODUKTU", nullable = false)
-    private Long idProduktu;
-
-    public Long getIdProduktu() {
-        return idProduktu;
-    }
-
-    public void setIdProduktu(Long idProduktu) {
-        this.idProduktu = idProduktu;
-    }
-
-    public Long getIdKlienta() {
-        return idKlienta;
-    }
-
-    public void setIdKlienta(Long idKlienta) {
-        this.idKlienta = idKlienta;
-    }
 
     public Boolean getCzyDostawa() {
         return czyDostawa;
@@ -59,12 +45,12 @@ public class ZakupyProduktow {
         this.data = data;
     }
 
-    public Long getIdZakupu() {
-        return idZakupu;
+    public Produkty getIdProduktu() {
+        return idProduktu;
     }
 
-    public void setIdZakupu(Long idZakupu) {
-        this.idZakupu = idZakupu;
+    public void setIdProduktu(Produkty idProduktu) {
+        this.idProduktu = idProduktu;
     }
 
     public Pracownicy getIdPracownika() {
@@ -73,6 +59,22 @@ public class ZakupyProduktow {
 
     public void setIdPracownika(Pracownicy idPracownika) {
         this.idPracownika = idPracownika;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Klienci getIdKlienta() {
+        return idKlienta;
+    }
+
+    public void setIdKlienta(Klienci idKlienta) {
+        this.idKlienta = idKlienta;
     }
 
 }

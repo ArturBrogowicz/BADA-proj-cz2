@@ -10,10 +10,6 @@ public class OcenyKlientow {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_PRACOWNIKA")
-    private Pracownicy idPracownika;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_KLIENTA")
     private Klienci idKlienta;
 
@@ -22,6 +18,18 @@ public class OcenyKlientow {
 
     @Column(name = "TRESC", length = 2500)
     private String tresc;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ID_PRACOWNIKA", nullable = false)
+    private Pracownicy idPracownika;
+
+    public Pracownicy getIdPracownika() {
+        return idPracownika;
+    }
+
+    public void setIdPracownika(Pracownicy idPracownika) {
+        this.idPracownika = idPracownika;
+    }
 
     public String getTresc() {
         return tresc;
@@ -39,14 +47,6 @@ public class OcenyKlientow {
         this.wysokosc = wysokosc;
     }
 
-    public Klienci getIdKlienta() {
-        return idKlienta;
-    }
-
-    public void setIdKlienta(Klienci idKlienta) {
-        this.idKlienta = idKlienta;
-    }
-
     public Long getId() {
         return id;
     }
@@ -55,12 +55,12 @@ public class OcenyKlientow {
         this.id = id;
     }
 
-    public Pracownicy getIdPracownika() {
-        return idPracownika;
+    public Klienci getIdKlienta() {
+        return idKlienta;
     }
 
-    public void setIdPracownika(Pracownicy idPracownika) {
-        this.idPracownika = idPracownika;
+    public void setIdKlienta(Klienci idKlienta) {
+        this.idKlienta = idKlienta;
     }
 
 }
