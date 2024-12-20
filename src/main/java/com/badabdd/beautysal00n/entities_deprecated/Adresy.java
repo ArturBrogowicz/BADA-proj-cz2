@@ -1,4 +1,4 @@
-package com.badabdd.beautysal00n.Encje;
+package com.badabdd.beautysal00n.entities_deprecated;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

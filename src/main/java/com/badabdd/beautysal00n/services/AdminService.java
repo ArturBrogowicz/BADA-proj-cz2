@@ -1,9 +1,9 @@
-package com.badabdd.beautysal00n.Serwisy;
+package com.badabdd.beautysal00n.services;
 
-import com.badabdd.beautysal00n.Encje.Pracownicy;
-import com.badabdd.beautysal00n.Encje.Salony;
-import com.badabdd.beautysal00n.Repozytoria.PracownicyRepository;
-import com.badabdd.beautysal00n.Repozytoria.SalonyRepository;
+import com.badabdd.beautysal00n.entities_deprecated.Pracownicy;
+import com.badabdd.beautysal00n.entities_deprecated.Salony;
+import com.badabdd.beautysal00n.repositories.PracownicyRepository;
+import com.badabdd.beautysal00n.repositories.SalonyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

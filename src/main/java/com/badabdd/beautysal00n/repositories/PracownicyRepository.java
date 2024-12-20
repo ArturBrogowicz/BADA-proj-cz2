@@ -1,9 +1,8 @@
-package com.badabdd.beautysal00n.Repozytoria;
+package com.badabdd.beautysal00n.repositories;
 
-import com.badabdd.beautysal00n.Encje.Pracownicy;
+import com.badabdd.beautysal00n.entities_deprecated.Pracownicy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

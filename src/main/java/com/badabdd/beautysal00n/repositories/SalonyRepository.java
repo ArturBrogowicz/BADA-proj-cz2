@@ -1,6 +1,6 @@
-package com.badabdd.beautysal00n.Repozytoria;
+package com.badabdd.beautysal00n.repositories;
 
-import com.badabdd.beautysal00n.Encje.Salony;
+import com.badabdd.beautysal00n.entities_deprecated.Salony;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

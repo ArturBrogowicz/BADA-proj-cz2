@@ -466,6 +466,9 @@ ALTER TABLE Produkty ADD CONSTRAINT produkt_ma_producenta FOREIGN KEY (id_produc
 ALTER TABLE Wykorzystane_Narzedzia ADD CONSTRAINT narzedzie_jest_wykorzystywane FOREIGN KEY (id_narzedzia) REFERENCES Narzedzia (id_narzedzia)
 /
 
+ALTER TABLE Wykorzystane_Narzedzia ADD CONSTRAINT usluga_wykorzystuje_narzedzie FOREIGN KEY (id_uslugi) REFERENCES Uslugi (id_uslugi)
+/
+
 
 
 ALTER TABLE Pracownicy ADD CONSTRAINT pracownik_ma_model_pracy FOREIGN KEY (id_modelu) REFERENCES Modele_Pracy (id_modelu)
@@ -476,17 +479,28 @@ ALTER TABLE Pracownicy ADD CONSTRAINT pracownik_ma_model_pracy FOREIGN KEY (id_m
 ALTER TABLE Wykonanie_Uslug ADD CONSTRAINT klient_rezerwuje_usluge FOREIGN KEY (id_klienta) REFERENCES Klienci (id_klienta)
 /
 
+ALTER TABLE Wykonanie_Uslug ADD CONSTRAINT pracownik_wykonuje_usluge FOREIGN KEY (id_pracownika) REFERENCES Pracownicy (id_pracownika)
+/
+
+ALTER TABLE Wykonanie_Uslug ADD CONSTRAINT usluga_zostaje_wykonana FOREIGN KEY (id_uslugi) REFERENCES Uslugi (id_uslugi)
+/
+
 
 
 ALTER TABLE Zakupy_Produktow ADD CONSTRAINT pracownik_sprzedaje_produkt FOREIGN KEY (id_pracownika) REFERENCES Pracownicy (id_pracownika)
 /
 
+ALTER TABLE Zakupy_Produktow ADD CONSTRAINT produkt_jest_kupowany FOREIGN KEY (id_produktu) REFERENCES Produkty (id_produktu)
+/
 
+ALTER TABLE Zakupy_Produktow ADD CONSTRAINT klient_dokonuje_zakupu FOREIGN KEY (id_klienta) REFERENCES Klienci (id_klienta)
+/
 
 ALTER TABLE Oceny_Klientow ADD CONSTRAINT usluger_ma_ocene FOREIGN KEY (id_pracownika) REFERENCES Pracownicy (id_pracownika)
 /
 
-
+ALTER TABLE Sprzedawcy ADD CONSTRAINT pracownik_ma_specjalizacje_sprzedawca FOREIGN KEY (id_pracownika) REFERENCES Pracownicy (id_pracownika)
+/
 
 ALTER TABLE Rezerwacje_Uslugerow ADD CONSTRAINT usluger_jest_zarezerwowany FOREIGN KEY (id_pracownika) REFERENCES Pracownicy (id_pracownika)
 /
