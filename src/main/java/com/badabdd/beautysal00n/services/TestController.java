@@ -22,4 +22,16 @@ public class TestController {
     public List<Adresy> findAll() {
         return this.repository.findAll();
     }
+
+    @GetMapping("/add")
+    public void add() {
+        Adresy a = new Adresy(null,
+                "City of Tears",
+                "Crying Street",
+                "92-123",
+                199,
+                null);
+
+        repository.save(a);
+    }
 }

@@ -544,3 +544,257 @@ ALTER TABLE Klienci ADD CONSTRAINT klient_ma_adres FOREIGN KEY (id_adresu) REFER
 
 ALTER TABLE Pracownicy ADD CONSTRAINT pracownik_ma_adres FOREIGN KEY (id_adresu) REFERENCES Adresy (id_adresu)
 /
+
+-- Create Sequences and Triggers for Ids' -------------------------------------------------------
+
+-- Adresy --
+
+CREATE SEQUENCE seq_id_adresu
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_adresu
+    BEFORE INSERT ON adresy
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_ADRESU IS NULL THEN
+        :NEW.ID_ADRESU := seq_id_adresu.NEXTVAL;
+END IF;
+END;
+/
+
+-- Klienci --
+
+CREATE SEQUENCE seq_id_klienta
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_klienta
+    BEFORE INSERT ON klienci
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_KLIENTA IS NULL THEN
+        :NEW.ID_KLIENTA := seq_id_klienta.NEXTVAL;
+END IF;
+END;
+/
+
+-- Modele_Pracy --
+
+CREATE SEQUENCE seq_id_modelu
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_modelu
+    BEFORE INSERT ON modele_pracy
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_MODELU IS NULL THEN
+        :NEW.ID_MODELU := seq_id_modelu.NEXTVAL;
+END IF;
+END;
+/
+
+-- Narzedzia --
+
+CREATE SEQUENCE seq_id_narzedzia
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_narzedzia
+    BEFORE INSERT ON narzedzia
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_NARZEDZIA IS NULL THEN
+        :NEW.ID_NARZEDZIA := seq_id_narzedzia.NEXTVAL;
+END IF;
+END;
+/
+
+-- Oceny_Klientow
+
+CREATE SEQUENCE seq_id_oceny
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_oceny
+    BEFORE INSERT ON oceny_klientow
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_OCENY IS NULL THEN
+        :NEW.ID_OCENY := seq_id_oceny.NEXTVAL;
+END IF;
+END;
+/
+
+-- Pracownicy --
+
+CREATE SEQUENCE seq_id_pracownika
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_pracownika
+    BEFORE INSERT ON pracownicy
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_PRACOWNIKA IS NULL THEN
+        :NEW.ID_PRACOWNIKA := seq_id_pracownika.NEXTVAL;
+END IF;
+END;
+/
+
+-- Producenci --
+
+CREATE SEQUENCE seq_id_producenta
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_producenta
+    BEFORE INSERT ON producenci
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_PRODUCENTA IS NULL THEN
+        :NEW.ID_PRODUCENTA := seq_id_producenta.NEXTVAL;
+END IF;
+END;
+/
+
+-- Produkty
+
+CREATE SEQUENCE seq_id_produktu
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_produktu
+    BEFORE INSERT ON produkty
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_PRODUKTU IS NULL THEN
+        :NEW.ID_PRODUKTU := seq_id_produktu.NEXTVAL;
+END IF;
+END;
+/
+
+-- Rezerwacje_Uslugerow
+
+CREATE SEQUENCE seq_id_rezerwacji
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_rezerwacji
+    BEFORE INSERT ON rezerwacje_uslugerow
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_REZERWACJI IS NULL THEN
+        :NEW.ID_REZERWACJI := seq_id_rezerwacji.NEXTVAL;
+END IF;
+END;
+/
+
+-- Salony --
+
+CREATE SEQUENCE seq_id_salonu
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_salonu
+    BEFORE INSERT ON salony
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_SALONU IS NULL THEN
+        :NEW.ID_SALONU := seq_id_salonu.NEXTVAL;
+END IF;
+END;
+/
+
+-- Uslugi --
+
+CREATE SEQUENCE seq_id_uslugi
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_uslugi
+    BEFORE INSERT ON uslugi
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_USLUGI IS NULL THEN
+        :NEW.ID_USLUGI := seq_id_uslugi.NEXTVAL;
+END IF;
+END;
+/
+
+-- Wlasciciele --
+
+CREATE SEQUENCE seq_id_wlasciciela
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_wlasciciela
+    BEFORE INSERT ON wlasciciele
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_WLASCICIELA IS NULL THEN
+        :NEW.ID_WLASCICIELA := seq_id_wlasciciela.NEXTVAL;
+END IF;
+END;
+/
+
+-- Wykonanie_Uslugi --
+
+CREATE SEQUENCE seq_id_wykonania
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_wykonania
+    BEFORE INSERT ON wykonanie_uslug
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_WYKONANIA IS NULL THEN
+        :NEW.ID_WYKONANIA := seq_id_wykonania.NEXTVAL;
+END IF;
+END;
+/
+
+-- Zakupy_Produktow --
+
+CREATE SEQUENCE seq_id_zakupu
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE;
+
+
+CREATE OR REPLACE TRIGGER trg_id_zakupu
+    BEFORE INSERT ON zakupy_produktow
+    FOR EACH ROW
+BEGIN
+    IF :NEW.ID_ZAKUPU IS NULL THEN
+        :NEW.ID_ZAKUPU := seq_id_zakupu.NEXTVAL;
+END IF;
+END;
+/
