@@ -4,17 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 
-public record Adresy (
+public record Salony (
         @Id
-        Integer idAdresu,
+        Integer idSalonu,
         @NotBlank
-        String miasto,
-        @NotBlank
-        String ulica,
-        @NotBlank
-        String kodPocztowy,
+        String nazwa,
         @NotNull
-        Integer nrBudynku,
-        Integer nrLokalu
+        Integer idAdresu
 ) {
 }
