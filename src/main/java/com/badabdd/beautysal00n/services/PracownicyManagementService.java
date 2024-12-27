@@ -82,6 +82,11 @@ public class PracownicyManagementService {
     }
     @Transactional
     public void addModelPracy(ModelePracy modelPracy) {
-        modelePracyRepository.save(modelPracy);
+        if (modelPracy.stanowisko().equals("usluger") || modelPracy.stanowisko().equals("menadzer") || modelPracy.stanowisko().equals("sprzedawca")) {
+            modelePracyRepository.save(modelPracy);
+        }
+        else{
+            throw new IllegalArgumentException("Unsupported stanowisko for model");
+        }
     }
 }

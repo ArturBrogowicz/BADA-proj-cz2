@@ -441,7 +441,7 @@ ALTER TABLE Rezerwacje_Uslugerow ADD CONSTRAINT PK_Rezerwacje_Uslugerow PRIMARY 
 /
 
 
--- Create foreign keys (relationships) section ------------------------------------------------- 
+-- Create foreign keys (relationships) section -------------------------------------------------
 
 ALTER TABLE Pracownicy ADD CONSTRAINT salon_ma_pracownikow FOREIGN KEY (id_salonu) REFERENCES Salony (id_salonu)
 /

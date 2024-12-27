@@ -37,7 +37,7 @@ Content-Type: application/json
 
 {
   "idModelu": null,
-  "stanowisko": "inzynier",
+  "stanowisko": "usluger",
   "pensja": 10000,
-  "trybPracy": "pol etatu"
+  "trybPracy": "pelny etat"
 }
