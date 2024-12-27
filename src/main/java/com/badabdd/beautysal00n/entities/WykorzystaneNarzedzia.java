@@ -4,6 +4,6 @@ import org.springframework.data.annotation.Id;
 
 public record WykorzystaneNarzedzia (
         @Id
-        IdWykonania idWykonania
+        IdWykorzystana idWykorzystana
 ) {
 }
