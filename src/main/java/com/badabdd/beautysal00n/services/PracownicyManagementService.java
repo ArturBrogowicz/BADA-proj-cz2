@@ -26,6 +26,8 @@ public class PracownicyManagementService {
                                        SprzedawcyRepository sprzedawcyRepository) {
         this.pracownicyRepository = pracownicyRepository;
         this.modelePracyRepository = modelePracyRepository;
+        this.uslugeryRepository = uslugeryRepository;
+        this.sprzedawcyRepository = sprzedawcyRepository;
     }
 
     public List<PracownicyModeleView> getAllPracownicyWithModele() {

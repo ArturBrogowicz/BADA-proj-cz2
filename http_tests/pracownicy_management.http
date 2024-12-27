@@ -1,1 +1,23 @@
-GET http://localhost:8080/api/
+### Wylistuj wszystkich pracowników
+GET http://localhost:8080/admin/pracownicy/list
+
+### Zatrudnij nowego pracownika
+POST http://localhost:8080/admin/pracownicy/add
+Content-Type: application/json
+
+{
+  "idPracownika": null,
+  "imie": "Kokos",
+  "nazwisko": "Nowak",
+  "pesel": "09281021011",
+  "czyPracuje": "1",
+  "idAdresu": 1,
+  "idSalonu": 1,
+  "idModelu": 3
+}
+
+### Zwolnij pracownika
+PUT http://localhost:8080/admin/pracownicy/delete
+Content-Type: application/json
+
+7

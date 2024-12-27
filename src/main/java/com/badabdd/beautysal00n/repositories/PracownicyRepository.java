@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PracownicyRepository extends ListCrudRepository<Pracownicy, Integer> {
+    Pracownicy findByIdPracownika(Integer id);
 }
