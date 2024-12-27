@@ -20,4 +20,24 @@ Content-Type: application/json
 PUT http://localhost:8080/admin/pracownicy/delete
 Content-Type: application/json
 
-7
+3
+
+### Zmien model pracownika
+PUT http://localhost:8080/admin/pracownicy/update_model
+Content-Type: application/json
+
+{
+  "stanowisko": "sprzedawca",
+  "idPracownika": 3
+}
+
+### Dodaj model pracy
+POST http://localhost:8080/admin/pracownicy/add_model
+Content-Type: application/json
+
+{
+  "idModelu": null,
+  "stanowisko": "inzynier",
+  "pensja": 10000,
+  "trybPracy": "pol etatu"
+}

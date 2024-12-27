@@ -7,6 +7,7 @@ import com.badabdd.beautysal00n.repositories.ModelePracyRepository;
 import com.badabdd.beautysal00n.repositories.PracownicyRepository;
 import com.badabdd.beautysal00n.repositories.SprzedawcyRepository;
 import com.badabdd.beautysal00n.repositories.UslugeryRepository;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,5 +65,23 @@ public class PracownicyManagementService {
                                                     firedPracownik.idModelu(),
                                                     firedPracownik.idAdresu());
         pracownicyRepository.save(firedPracownikUpdated);
+    }
+    @Transactional
+    public void changeModelOfPracownik(String stanowisko, Integer idPracownika){
+        Pracownicy pracownik = pracownicyRepository.findByIdPracownika(idPracownika);
+        ModelePracy modelPracy = modelePracyRepository.findByStanowisko(stanowisko);
+        Pracownicy changedPracownik = new Pracownicy(pracownik.idPracownika(),
+                pracownik.imie(),
+                pracownik.nazwisko(),
+                pracownik.pesel(),
+                pracownik.czyPracuje(),
+                pracownik.idSalonu(),
+                modelPracy.idModelu(),
+                pracownik.idAdresu());
+        pracownicyRepository.save(changedPracownik);
+    }
+    @Transactional
+    public void addModelPracy(ModelePracy modelPracy) {
+        modelePracyRepository.save(modelPracy);
     }
 }
