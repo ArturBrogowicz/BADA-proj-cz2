@@ -9,5 +9,5 @@ public class BeautySal00nApplication {
     public static void main(String[] args) {
         SpringApplication.run(BeautySal00nApplication.class, args);
     }
-
+    // Test change
 }
