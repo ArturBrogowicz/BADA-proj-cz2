@@ -18,4 +18,6 @@ public interface UslugeryRepository extends ListCrudRepository<Uslugery,Integer>
             """)
     void insertUsluger(@Param("id_pracownika") Integer idPracownika,
                           @Param("srednia_ocen") Integer sredniaOcen);
+
+    Uslugery findByIdPracownika(Integer idPracownika);
 }

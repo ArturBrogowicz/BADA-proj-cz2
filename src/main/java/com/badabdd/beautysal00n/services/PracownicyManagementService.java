@@ -66,6 +66,7 @@ public class PracownicyManagementService {
                                                     firedPracownik.idAdresu());
         pracownicyRepository.save(firedPracownikUpdated);
     }
+
     @Transactional
     public void changeModelOfPracownik(String stanowisko, Integer idPracownika){
         Pracownicy pracownik = pracownicyRepository.findByIdPracownika(idPracownika);
@@ -80,6 +81,7 @@ public class PracownicyManagementService {
                 pracownik.idAdresu());
         pracownicyRepository.save(changedPracownik);
     }
+
     @Transactional
     public void addModelPracy(ModelePracy modelPracy) {
         if (modelPracy.stanowisko().equals("usluger") || modelPracy.stanowisko().equals("menadzer") || modelPracy.stanowisko().equals("sprzedawca")) {

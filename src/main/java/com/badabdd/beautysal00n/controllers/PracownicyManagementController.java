@@ -12,16 +12,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("admin/pracownicy/")
-public class PracownicyController {
+public class PracownicyManagementController {
 
     private final PracownicyManagementService pracownicyManagementService;
 
-    public PracownicyController(PracownicyManagementService pracownicyManagementService) {
+    public PracownicyManagementController(PracownicyManagementService pracownicyManagementService) {
         this.pracownicyManagementService = pracownicyManagementService;
     }
 
     @GetMapping("/list")
-    public List<PracownicyModeleView> listAll() {
+    public List<PracownicyModeleView> listPracownikow() {
         return this.pracownicyManagementService.getAllPracownicyWithModele();
     }
 

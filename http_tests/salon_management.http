@@ -1,0 +1,5 @@
+### List all Wlasciciele
+GET http://localhost:8080/admin/salon/wlasciciele/list
+
+### Delete Wlasciciela (id=1)
+DELETE http://localhost:8080/admin/salon/wlasciciele/delete/1
