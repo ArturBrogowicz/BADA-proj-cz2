@@ -28,7 +28,7 @@ Content-Type: application/json
 
 {
   "stanowisko": "sprzedawca",
-  "idPracownika": 3
+  "idPracownika": 1
 }
 
 ### Dodaj model pracy

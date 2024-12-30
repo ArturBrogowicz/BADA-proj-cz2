@@ -9,14 +9,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SprzedawcyRepository extends ListCrudRepository<Sprzedawcy, Integer> {
+    @Modifying
+    @Query("""
+            SELECT * FROM SPRZEDAWCY WHERE ID_PRACOWNIKA = :idPracownika
+            """)
+    Sprzedawcy findSprzedawcyByIdPracownika(@Param("idPracownika") Integer idPracownika);
 
     @Modifying
     @Query("""
-            INSERT INTO sprzedawcy(id_pracownika, laczna_sprzedaz, liczba_transakcji)
-            VALUES (:id_pracownika, :laczna_sprzedaz, :liczba_transakcji)
+            INSERT INTO SPRZEDAWCY (ID_PRACOWNIKA, LACZNA_SPRZEDAZ, LICZBA_TRANSAKCJI)
+            VALUES (:idPracownika, :lacznaSprzedaz, :liczbaTransakcji)
             """)
-    void insertSprzedawca(@Param("id_pracownika") Integer idPracownika,
-                          @Param("laczna_sprzedaz") Double lacznaSprzedaz,
-                          @Param("liczba_transakcji") Integer liczbaTransakcji);
-
+    void insertSprzedawca(@Param("idPracownika") Integer idPracownika,
+                          @Param("lacznaSprzedaz") Double lacznaSprzedaz,
+                          @Param("liczbaTransakcji") Integer liczbaTransakcji);
 }
+

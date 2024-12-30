@@ -1,21 +1,29 @@
 package com.badabdd.beautysal00n.services;
 
-import com.badabdd.beautysal00n.entities.Produkty;
-import com.badabdd.beautysal00n.entities.Uslugi;
+import com.badabdd.beautysal00n.entities.*;
 import com.badabdd.beautysal00n.repositories.ProduktyRepository;
+import com.badabdd.beautysal00n.repositories.SprzedawcyRepository;
 import com.badabdd.beautysal00n.repositories.UslugiRepository;
+import com.badabdd.beautysal00n.repositories.ZakupyProduktowRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 public class SalesService {
 
     private final ProduktyRepository produktyRepository;
     private final UslugiRepository uslugiRepository;
+    private final ZakupyProduktowRepository zakupyProduktowRepository;
+    private final SprzedawcyRepository sprzedawcyRepository;
 
-    public SalesService(ProduktyRepository produktyRepository, UslugiRepository uslugiRepository) {
+    public SalesService(ProduktyRepository produktyRepository, UslugiRepository uslugiRepository,
+                        ZakupyProduktowRepository zakupyProduktowRepository, SprzedawcyRepository sprzedawcyRepository) {
         this.produktyRepository = produktyRepository;
         this.uslugiRepository = uslugiRepository;
+        this.zakupyProduktowRepository = zakupyProduktowRepository;
+        this.sprzedawcyRepository = sprzedawcyRepository;
     }
 
     @Transactional
@@ -53,5 +61,25 @@ public class SalesService {
         Uslugi withdrawnUsluga = new Uslugi(uslugaToWithdraw.idUslugi(), uslugaToWithdraw.nazwa(),
                 uslugaToWithdraw.opis(), uslugaToWithdraw.koszt(), '0', uslugaToWithdraw.idSalonu());
         uslugiRepository.save(withdrawnUsluga);
+    }
+    @Transactional
+    public void saleProduktInSalon(Integer idProduktu, Integer amount, Integer idSprzedawcy, Integer idZakupyProduktow, LocalDateTime data, char czyDostawa, Integer idKlienta) {
+        if(produktyRepository.findByIdProduktu(idProduktu) == null) {
+            throw new IllegalArgumentException("There is no such produkt");
+        } else if (produktyRepository.findByIdProduktu(idProduktu).liczbaSztuk() < amount) {
+            System.out.println("Not enough produkt in Salon, you can order at most "+ produktyRepository.findByIdProduktu(idProduktu).liczbaSztuk() +" of produkt");
+        } else if (idKlienta == null) {
+            // odesłanie do rejestracji klienta
+        } else {
+            zakupyProduktowRepository.save(new ZakupyProduktow(idZakupyProduktow, data, czyDostawa, idKlienta, idProduktu, idSprzedawcy));
+            Sprzedawcy currentSprzedawca = sprzedawcyRepository.findSprzedawcyByIdPracownika(idSprzedawcy);
+            Produkty currentProdukt = produktyRepository.findByIdProduktu(idProduktu);
+            sprzedawcyRepository.save(new Sprzedawcy(idSprzedawcy,
+                    currentSprzedawca.lacznaSprzedaz()+currentProdukt.cena()*amount,
+                    currentSprzedawca.liczbaTransakcji()+1));
+            produktyRepository.save(new Produkty(currentProdukt.idProduktu(),currentProdukt.nazwa(),
+                    currentProdukt.cena(),currentProdukt.opis(),currentProdukt.liczbaSztuk()-amount,
+                    currentProdukt.czyOferowany(),currentProdukt.idProducenta(), currentProdukt.idSalonu()));
+        }
     }
 }

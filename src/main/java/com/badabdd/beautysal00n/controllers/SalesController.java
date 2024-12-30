@@ -1,11 +1,13 @@
 package com.badabdd.beautysal00n.controllers;
 
-import com.badabdd.beautysal00n.entities.Klienci;
+import com.badabdd.beautysal00n.dto_views.SaleRequest;
 import com.badabdd.beautysal00n.entities.Produkty;
 import com.badabdd.beautysal00n.entities.Uslugi;
 import com.badabdd.beautysal00n.services.SalesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/sales")
@@ -45,6 +47,14 @@ public class SalesController {
     @PutMapping("/uslugi/withdraw/{idUslugi}")
     public void withdrawUslugeFromOffer(@PathVariable Integer idUslugi) {
         salesService.withdrawUslugeFromOffer(idUslugi);
+    }
+    @PostMapping("/produkty/sell")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void sellProdukt(@RequestBody SaleRequest saleRequest) {
+        salesService.saleProduktInSalon(saleRequest.idProduktu(),
+                saleRequest.amount(), saleRequest.idSprzedawcy(),
+                saleRequest.idZakupyProduktow(), saleRequest.data(),
+                saleRequest.czyDostawa(), saleRequest.idKlienta());
     }
 
 }
