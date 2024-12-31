@@ -38,7 +38,7 @@ public class SalesController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PutMapping("/uslugi/add")
+    @PostMapping("/uslugi/add")
     public void addNewUsluga(@RequestBody Uslugi newUsluga) {
         salesService.addNewUsluga(newUsluga);
     }
@@ -48,13 +48,12 @@ public class SalesController {
     public void withdrawUslugeFromOffer(@PathVariable Integer idUslugi) {
         salesService.withdrawUslugeFromOffer(idUslugi);
     }
-    @PostMapping("/produkty/sell")
+    @PutMapping("/produkty/sell")
     @ResponseStatus(HttpStatus.CREATED)
     public void sellProdukt(@RequestBody SaleRequest saleRequest) {
         salesService.saleProduktInSalon(saleRequest.idProduktu(),
                 saleRequest.amount(), saleRequest.idSprzedawcy(),
-                saleRequest.idZakupyProduktow(), saleRequest.data(),
-                saleRequest.czyDostawa(), saleRequest.idKlienta());
+                saleRequest.data(), saleRequest.idKlienta());
     }
 
 }

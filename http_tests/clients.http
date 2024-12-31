@@ -1,0 +1,25 @@
+### Register a new Klienta
+POST http://localhost:8080/clients/add
+Content-Type: application/json
+
+{
+  "idKlienta": null,
+  "imie": "Fufix",
+  "nazwisko": "Gnufix",
+  "nrTelefonu": "777777777",
+  "plec": "M",
+  "idSalonu": 1,
+  "idAdresu": 5
+}
+
+### Rate an Usluger
+POST http://localhost:8080/clients/rateusluger/7
+Content-Type: application/json
+
+{
+  "idOceny": null,
+  "wysokosc": 1,
+  "tresc": "Review bombing!",
+  "idPracownika": 7,
+  "idKlienta": 2
+}

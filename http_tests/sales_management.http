@@ -1,12 +1,10 @@
-POST http://localhost:8080/sales/produkty/sell
+PUT http://localhost:8080/sales/produkty/sell
 Content-Type: application/json
 
 {
   "idProduktu": 1,
-  "amount": 2,
-  "idSprzedawcy": 2,
-  "idZakupyProduktow": null,
+  "amount": 20,
+  "idSprzedawcy": 8,
   "data": "2024-12-28T12:00:00",
-  "czyDostawa": "N",
-  "idKlienta": 1
+  "idKlienta": 2
 }

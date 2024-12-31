@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SprzedawcyRepository extends ListCrudRepository<Sprzedawcy, Integer> {
-    @Modifying
+
     @Query("""
             SELECT * FROM SPRZEDAWCY WHERE ID_PRACOWNIKA = :idPracownika
             """)

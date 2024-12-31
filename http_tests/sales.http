@@ -1,0 +1,36 @@
+### Accept Delivery Produktow
+PUT http://localhost:8080/sales/produkty/delivery/1/56
+
+### Withdraw Usluge from offer
+PUT http://localhost:8080/sales/uslugi/withdraw/1
+
+### Withdraw Produkt from offer
+PUT http://localhost:8080/sales/produkty/withdraw/1
+
+### Add new Produkt to offer
+POST http://localhost:8080/sales/produkty/add
+Content-Type: application/json
+
+{
+  "idProduktu": null,
+  "nazwa": "Chujowy Produkt",
+  "cena": 0.01,
+  "opis": "Nie wiem po co taki produkt sprzedawać",
+  "liczbaSztuk": 42,
+  "czyOferowany": "1",
+  "idProducenta": 1,
+  "idSalonu": 1
+}
+
+### Add new Usluge to offer
+POST http://localhost:8080/sales/uslugi/add
+Content-Type: application/json
+
+{
+  "idUslugi": null,
+  "nazwa": "Solarium",
+  "opis": "Opalanie się w solarium, bez jakiejś głębszej filozofii",
+  "koszt": 99.99,
+  "czyOferowana": "1",
+  "idSalonu": 1
+}

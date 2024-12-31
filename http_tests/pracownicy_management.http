@@ -7,13 +7,13 @@ Content-Type: application/json
 
 {
   "idPracownika": null,
-  "imie": "Kokos",
-  "nazwisko": "Nowak",
-  "pesel": "09281021011",
+  "imie": "Saddy",
+  "nazwisko": "Nójż",
+  "pesel": "12312312312",
   "czyPracuje": "1",
-  "idAdresu": 1,
+  "idAdresu": 3,
   "idSalonu": 1,
-  "idModelu": 3
+  "idModelu": 4
 }
 
 ### Zwolnij pracownika

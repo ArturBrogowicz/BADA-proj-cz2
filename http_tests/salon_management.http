@@ -1,5 +1,30 @@
 ### List all Wlasciciele
 GET http://localhost:8080/admin/salon/wlasciciele/list
 
-### Delete Wlasciciela (id=1)
-DELETE http://localhost:8080/admin/salon/wlasciciele/delete/1
+### Add Wlasciciela
+POST http://localhost:8080/admin/salon/wlasciciele/add
+Content-Type: application/json
+
+{
+  "idWlasciciela": null,
+  "imie": "Fufel",
+  "nazwisko": "Gnufel",
+  "idSalonu": 1,
+  "idAdresu": 2
+}
+
+### Delete Wlasciciela (ustawić odpowiednie id)
+DELETE http://localhost:8080/admin/salon/wlasciciele/delete/2
+
+### Acquire new Narzedzie
+POST http://localhost:8080/admin/salon/narzedzia/add
+Content-Type: application/json
+
+{
+  "idNarzedzia": null,
+  "nazwa": "MłotekPłotek",
+  "cena": 20.99,
+  "opis": "Proste narzędzie do wbijania gwoździ w płot",
+  "idSalonu": 1
+}
+
