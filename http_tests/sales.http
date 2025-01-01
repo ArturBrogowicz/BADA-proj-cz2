@@ -34,3 +34,14 @@ Content-Type: application/json
   "czyOferowana": "1",
   "idSalonu": 1
 }
+
+### Reservation of Usluga
+POST http://localhost:8080/sales/uslugi/reservation
+Content-Type: application/json
+
+{
+  "idKlienta": 2,
+  "idUslugi": 2,
+  "data": "2024-12-28T12:00:00",
+  "czasTrwania": 90
+}

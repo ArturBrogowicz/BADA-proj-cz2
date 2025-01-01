@@ -4,7 +4,7 @@ Content-Type: application/json
 {
   "idProduktu": 1,
   "amount": 20,
-  "idSprzedawcy": 8,
+  "idSprzedawcy": 2,
   "data": "2024-12-28T12:00:00",
-  "idKlienta": 2
+  "idKlienta": 1
 }

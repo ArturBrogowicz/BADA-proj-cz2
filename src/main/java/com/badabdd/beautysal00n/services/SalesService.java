@@ -1,10 +1,8 @@
 package com.badabdd.beautysal00n.services;
 
 import com.badabdd.beautysal00n.entities.*;
-import com.badabdd.beautysal00n.repositories.ProduktyRepository;
-import com.badabdd.beautysal00n.repositories.SprzedawcyRepository;
-import com.badabdd.beautysal00n.repositories.UslugiRepository;
-import com.badabdd.beautysal00n.repositories.ZakupyProduktowRepository;
+import com.badabdd.beautysal00n.repositories.*;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,13 +15,21 @@ public class SalesService {
     private final UslugiRepository uslugiRepository;
     private final ZakupyProduktowRepository zakupyProduktowRepository;
     private final SprzedawcyRepository sprzedawcyRepository;
+    private final WykonanieUslugRepository wykonanieUslugRepository;
+    private final RezerwacjeUslugerowRepository rezerwacjeUslugerowRepository;
+    private final PracownicyRepository pracownicyRepository;
 
     public SalesService(ProduktyRepository produktyRepository, UslugiRepository uslugiRepository,
-                        ZakupyProduktowRepository zakupyProduktowRepository, SprzedawcyRepository sprzedawcyRepository) {
+                        ZakupyProduktowRepository zakupyProduktowRepository, SprzedawcyRepository sprzedawcyRepository,
+                        WykonanieUslugRepository wykonanieUslugRepository, RezerwacjeUslugerowRepository rezerwacjeUslugerowRepository,
+                        PracownicyRepository pracownicyRepository) {
         this.produktyRepository = produktyRepository;
         this.uslugiRepository = uslugiRepository;
         this.zakupyProduktowRepository = zakupyProduktowRepository;
         this.sprzedawcyRepository = sprzedawcyRepository;
+        this.wykonanieUslugRepository = wykonanieUslugRepository;
+        this.rezerwacjeUslugerowRepository = rezerwacjeUslugerowRepository;
+        this.pracownicyRepository = pracownicyRepository;
     }
 
     @Transactional
@@ -81,5 +87,12 @@ public class SalesService {
                     currentProdukt.cena(),currentProdukt.opis(),currentProdukt.liczbaSztuk()-amount,
                     currentProdukt.czyOferowany(),currentProdukt.idProducenta(), currentProdukt.idSalonu()));
         }
+    }
+    @Transactional
+    public void reservationOfUsluga(Integer idUslugi, Integer idKlienta, LocalDateTime data, Integer czasTrwania) {
+        Integer newIdWykonania = wykonanieUslugRepository.getMaxId() + 1; // Generowanie unikalnego ID
+        wykonanieUslugRepository.insertWykonanieUslugi(newIdWykonania, data, czasTrwania, idUslugi, idKlienta, pracownicyRepository.findPracownikWhoPracuje().idPracownika());
+        Integer newIdRezerwacji = rezerwacjeUslugerowRepository.getMaxId() + 1;
+        rezerwacjeUslugerowRepository.insertRezerwacjaUslugerow(newIdRezerwacji, pracownicyRepository.findPracownikWhoPracuje().idPracownika(), data);
     }
 }
