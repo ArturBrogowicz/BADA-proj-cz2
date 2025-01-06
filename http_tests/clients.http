@@ -13,13 +13,13 @@ Content-Type: application/json
 }
 
 ### Rate an Usluger
-POST http://localhost:8080/clients/rateusluger/7
+POST http://localhost:8080/clients/rateusluger/1
 Content-Type: application/json
 
 {
   "idOceny": null,
-  "wysokosc": 1,
+  "wysokosc": 5,
   "tresc": "Review bombing!",
-  "idPracownika": 7,
-  "idKlienta": 2
+  "idPracownika": 2,
+  "idKlienta": 1
 }

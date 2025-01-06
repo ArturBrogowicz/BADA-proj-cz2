@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example of AJAX</title>
+</head>
+<body>
+<button id="button">Load Pracownicy from Salon</button>
+<br><br>
+<h1>Pracownicy</h1>
+<div id="pracownicy"></div>
+
+<script>
+    document.getElementById("button").addEventListener('click', loadPracownicy);
+
+    function loadPracownicy() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', "http://localhost:8080/admin/pracownicy/list", true);
+        xhr.onload = function () {
+            if (this.status === 200) {
+                try {
+                    var pracownicy = JSON.parse(this.responseText);
+                    var output = '';
+
+                    pracownicy.forEach(function(pracownik) {
+                        output += '<div class="pracownik">' +
+                            '<ul>' +
+                            '<li><strong>Imię:</strong> ' + pracownik.imie + '</li>' +
+                            '<li><strong>Nazwisko:</strong> ' + pracownik.nazwisko + '</li>' +
+                            '<li><strong>Stanowisko:</strong> ' + pracownik.stanowisko + '</li>' +
+                            '<li><strong>Tryb Pracy:</strong> ' + pracownik.trybPracy + '</li>' +
+                            '<li><strong>Pensja:</strong> ' + pracownik.pensja + '</li>' +
+                            '</ul>' +
+                            '</div>';
+                    });
+
+                    document.getElementById('pracownicy').innerHTML = output;
+                } catch (error) {
+                    console.error("Błąd parsowania JSON: ", error);
+                }
+            } else {
+                console.error("Błąd połączenia: " + this.status);
+            }
+        };
+        xhr.onerror = function () {
+            console.error("Błąd połączenia z serwerem.");
+        };
+        xhr.send();
+    }
+</script>
+</body>
+</html>
