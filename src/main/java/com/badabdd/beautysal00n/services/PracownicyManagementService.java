@@ -33,9 +33,9 @@ public class PracownicyManagementService {
 
     public List<PracownicyModeleView> getAllPracownicyWithModele() {
         List<Pracownicy> pracownicy = pracownicyRepository.findAll();
-        return pracownicy.stream().map(pracownik -> {
+        return pracownicy.stream().filter(pracownik -> pracownik.czyPracuje() == '1').map(pracownik -> {
             ModelePracy model = modelePracyRepository.findByIdModelu(pracownik.idModelu());
-            return new PracownicyModeleView(pracownik.imie(), pracownik.nazwisko(), model.stanowisko(), model.trybPracy(), model.pensja());
+            return new PracownicyModeleView(pracownik.idPracownika(),pracownik.imie(), pracownik.nazwisko(), model.stanowisko(), model.trybPracy(), model.pensja());
         }).toList();
     }
 

@@ -11,16 +11,16 @@ Content-Type: application/json
   "nazwisko": "Nójż",
   "pesel": "12312312312",
   "czyPracuje": "1",
-  "idAdresu": 3,
+  "idAdresu": 1,
   "idSalonu": 1,
-  "idModelu": 4
+  "idModelu": 2
 }
 
 ### Zwolnij pracownika
 PUT http://localhost:8080/admin/pracownicy/delete
 Content-Type: application/json
 
-3
+29
 
 ### Zmien model pracownika
 PUT http://localhost:8080/admin/pracownicy/update_model
