@@ -1,6 +1,7 @@
 package com.badabdd.beautysal00n.controllers;
 
 import com.badabdd.beautysal00n.dto_views.PracownicyModeleView;
+import com.badabdd.beautysal00n.dto_views.PracownicyView;
 import com.badabdd.beautysal00n.dto_views.UpdateModelRequest;
 import com.badabdd.beautysal00n.entities.ModelePracy;
 import com.badabdd.beautysal00n.entities.Pracownicy;
@@ -23,6 +24,12 @@ public class PracownicyManagementController {
     @GetMapping("/list")
     public List<PracownicyModeleView> listPracownikow() {
         return this.pracownicyManagementService.getAllPracownicyWithModele();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public PracownicyView getPracownicy(@PathVariable int id) {
+        return this.pracownicyManagementService.getPracownicyById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
