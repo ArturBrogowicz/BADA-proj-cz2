@@ -6,15 +6,19 @@ POST http://localhost:8080/admin/pracownicy/add
 Content-Type: application/json
 
 {
-  "idPracownika": null,
-  "imie": "Saddy",
-  "nazwisko": "Nójż",
-  "pesel": "12312312312",
-  "czyPracuje": "1",
-  "idAdresu": 1,
-  "idSalonu": 1,
-  "idModelu": 2
+  "imie": "Jan",
+  "nazwisko": "Kowalski",
+  "pesel": "12345678901",
+  "miasto": "Warszawa",
+  "ulica": "Srebrna",
+  "kodPocztowy": "00-001",
+  "nrBudynku": 10,
+  "nrLokalu": 5,
+  "stanowisko": "usluger",
+  "trybPracy": "pol etatu",
+  "pensja": 7500.50
 }
+
 
 ### Zwolnij pracownika
 PUT http://localhost:8080/admin/pracownicy/delete

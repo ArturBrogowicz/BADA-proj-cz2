@@ -34,7 +34,7 @@ public class PracownicyManagementController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
-    public void addPracownik(@RequestBody Pracownicy newPracownik) {
+    public void addPracownik(@RequestBody PracownicyView newPracownik) {
         pracownicyManagementService.hirePracownika(newPracownik);
     }
     @PutMapping("/delete")

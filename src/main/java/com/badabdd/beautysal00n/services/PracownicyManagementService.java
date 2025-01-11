@@ -42,12 +42,30 @@ public class PracownicyManagementService {
     }
 
     @Transactional
-    public void hirePracownika(Pracownicy newPracownik) {
+    public void hirePracownika(PracownicyView newPracownik) {
+        ModelePracy model =  modelePracyRepository.findByAttributes(newPracownik.stanowisko(),
+                newPracownik.trybPracy(), newPracownik.pensja());
+        if(model == null) {
+            modelePracyRepository.save(new ModelePracy(null, newPracownik.stanowisko(), newPracownik.trybPracy(), newPracownik.pensja()));
+            model =  modelePracyRepository.findByAttributes(newPracownik.stanowisko(),
+                    newPracownik.trybPracy(), newPracownik.pensja());
+        }
+        Adresy adresy = adresyRepository.findByAttributes(newPracownik.miasto(), newPracownik.ulica(),
+                newPracownik.kodPocztowy(),
+                newPracownik.nrBudynku(), newPracownik.nrLokalu());
+        if(adresy == null) {
+            adresyRepository.save(new Adresy(null, newPracownik.miasto(), newPracownik.ulica(),
+                    newPracownik.kodPocztowy(),
+                    newPracownik.nrBudynku(), newPracownik.nrLokalu()));
+            adresy = adresyRepository.findByAttributes(newPracownik.miasto(), newPracownik.ulica(),
+                    newPracownik.kodPocztowy(),
+                    newPracownik.nrBudynku(), newPracownik.nrLokalu());
+        }
 
-        Pracownicy savedPracownik = pracownicyRepository.save(newPracownik);
+        Pracownicy savedPracownik = new Pracownicy(null, newPracownik.imie(), newPracownik.nazwisko(), newPracownik.pesel(), '1', 1, model.idModelu(), adresy.idAdresu() );
         Integer id = savedPracownik.idPracownika();
 
-        String stanowisko = modelePracyRepository.findByIdModelu(newPracownik.idModelu()).stanowisko();
+        String stanowisko = model.stanowisko();
         if (stanowisko.equalsIgnoreCase("USLUGER")) {
             uslugeryRepository.insertUsluger(id, 5);
         } else if (stanowisko.equalsIgnoreCase("SPRZEDAWCA")) {
