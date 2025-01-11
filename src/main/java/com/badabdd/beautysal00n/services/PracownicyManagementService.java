@@ -62,7 +62,7 @@ public class PracownicyManagementService {
                     newPracownik.nrBudynku(), newPracownik.nrLokalu());
         }
 
-        Pracownicy savedPracownik = new Pracownicy(null, newPracownik.imie(), newPracownik.nazwisko(), newPracownik.pesel(), '1', 1, model.idModelu(), adresy.idAdresu() );
+        Pracownicy savedPracownik = pracownicyRepository.save(new Pracownicy(null, newPracownik.imie(), newPracownik.nazwisko(), newPracownik.pesel(), '1', 1, model.idModelu(), adresy.idAdresu()));
         Integer id = savedPracownik.idPracownika();
 
         String stanowisko = model.stanowisko();
