@@ -88,16 +88,21 @@ public class PracownicyManagementService {
     }
 
     @Transactional
-    public void changeModelOfPracownik(String stanowisko, Integer idPracownika){
+    public void changeModelOfPracownik(Integer idPracownika ,String stanowisko, String trybPracy, Double pensja){
+        ModelePracy model =  modelePracyRepository.findByAttributes(stanowisko,
+                trybPracy, pensja);
+        if(model == null) {
+            modelePracyRepository.save(new ModelePracy(null, stanowisko, trybPracy, pensja));
+            model =  modelePracyRepository.save(new ModelePracy(null, stanowisko, trybPracy, pensja));
+        }
         Pracownicy pracownik = pracownicyRepository.findByIdPracownika(idPracownika);
-        ModelePracy modelPracy = modelePracyRepository.findByStanowisko(stanowisko);
         Pracownicy changedPracownik = new Pracownicy(pracownik.idPracownika(),
                 pracownik.imie(),
                 pracownik.nazwisko(),
                 pracownik.pesel(),
                 pracownik.czyPracuje(),
                 pracownik.idSalonu(),
-                modelPracy.idModelu(),
+                model.idModelu(),
                 pracownik.idAdresu());
         pracownicyRepository.save(changedPracownik);
     }

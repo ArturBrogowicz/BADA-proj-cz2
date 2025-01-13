@@ -31,8 +31,10 @@ PUT http://localhost:8080/admin/pracownicy/update_model
 Content-Type: application/json
 
 {
+  "idPracownika": 48,
   "stanowisko": "sprzedawca",
-  "idPracownika": 1
+  "trybPracy": "cwierc etatu",
+  "pensja": 1000.5
 }
 
 ### Dodaj model pracy

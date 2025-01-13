@@ -44,7 +44,10 @@ public class PracownicyManagementController {
 
     @PutMapping("/update_model")
     public void updateModelOfPracownik(@RequestBody UpdateModelRequest request) {
-        pracownicyManagementService.changeModelOfPracownik(request.stanowisko(), request.idPracownika());
+        pracownicyManagementService.changeModelOfPracownik(request.idPracownika(),
+                request.stanowisko(),
+                request.trybPracy(),
+                request.pensja());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
