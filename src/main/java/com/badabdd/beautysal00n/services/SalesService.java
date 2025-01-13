@@ -1,5 +1,6 @@
 package com.badabdd.beautysal00n.services;
 
+import com.badabdd.beautysal00n.dto_views.ProduktyView;
 import com.badabdd.beautysal00n.entities.*;
 import com.badabdd.beautysal00n.repositories.*;
 import org.springframework.data.relational.core.sql.In;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class SalesService {
@@ -18,11 +20,12 @@ public class SalesService {
     private final WykonanieUslugRepository wykonanieUslugRepository;
     private final RezerwacjeUslugerowRepository rezerwacjeUslugerowRepository;
     private final PracownicyRepository pracownicyRepository;
+    private final ProducenciRepository producenciRepository;
 
     public SalesService(ProduktyRepository produktyRepository, UslugiRepository uslugiRepository,
                         ZakupyProduktowRepository zakupyProduktowRepository, SprzedawcyRepository sprzedawcyRepository,
                         WykonanieUslugRepository wykonanieUslugRepository, RezerwacjeUslugerowRepository rezerwacjeUslugerowRepository,
-                        PracownicyRepository pracownicyRepository) {
+                        PracownicyRepository pracownicyRepository, ProducenciRepository producenciRepository) {
         this.produktyRepository = produktyRepository;
         this.uslugiRepository = uslugiRepository;
         this.zakupyProduktowRepository = zakupyProduktowRepository;
@@ -30,6 +33,22 @@ public class SalesService {
         this.wykonanieUslugRepository = wykonanieUslugRepository;
         this.rezerwacjeUslugerowRepository = rezerwacjeUslugerowRepository;
         this.pracownicyRepository = pracownicyRepository;
+        this.producenciRepository = producenciRepository;
+    }
+
+    public List<ProduktyView> listAllOfferedProdukty() {
+        List<Produkty> produkty = produktyRepository.findAll();
+        return produkty.stream().filter(produkt -> produkt.czyOferowany() == '1')
+                .map(produkt -> {
+                    Producenci producent = producenciRepository.findByIdProducenta(produkt.idProducenta());
+                    return new ProduktyView(
+                            produkt.nazwa(),
+                            produkt.cena(),
+                            produkt.opis(),
+                            produkt.liczbaSztuk(),
+                            producent.nazwa()
+                    );
+                }).toList();
     }
 
     @Transactional

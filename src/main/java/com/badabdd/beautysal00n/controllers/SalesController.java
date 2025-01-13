@@ -1,5 +1,6 @@
 package com.badabdd.beautysal00n.controllers;
 
+import com.badabdd.beautysal00n.dto_views.ProduktyView;
 import com.badabdd.beautysal00n.dto_views.ReservationRequest;
 import com.badabdd.beautysal00n.dto_views.SaleRequest;
 import com.badabdd.beautysal00n.entities.Produkty;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/sales")
@@ -18,6 +20,11 @@ public class SalesController {
 
     public SalesController(SalesService salesService) {
         this.salesService = salesService;
+    }
+
+    @GetMapping("/produkty/list")
+    public List<ProduktyView> listAllOfferedProdukty() {
+        return salesService.listAllOfferedProdukty();
     }
 
     @ResponseStatus(HttpStatus.CREATED)

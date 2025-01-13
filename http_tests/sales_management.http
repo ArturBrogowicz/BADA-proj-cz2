@@ -1,3 +1,8 @@
+### Lista wszystkich oferowanych produktów
+GET http://localhost:8080/sales/produkty/list
+
+
+### Zakup produktu online
 PUT http://localhost:8080/sales/produkty/sell
 Content-Type: application/json
 
