@@ -69,7 +69,7 @@ public class SalesService {
         uslugiRepository.save(withdrawnUsluga);
     }
     @Transactional
-    public void saleProduktInSalon(Integer idProduktu, Integer amount, Integer idSprzedawcy, LocalDateTime data, Integer idKlienta) {
+    public void saleProduktOnline(Integer idProduktu, Integer amount, LocalDateTime data, Integer idKlienta) {
         if(produktyRepository.findByIdProduktu(idProduktu) == null) {
             throw new IllegalArgumentException("There is no such produkt");
         } else if (produktyRepository.findByIdProduktu(idProduktu).liczbaSztuk() < amount) {
@@ -77,12 +77,8 @@ public class SalesService {
         } else if (idKlienta == null) {
             // odesłanie do rejestracji klienta
         } else {
-            zakupyProduktowRepository.save(new ZakupyProduktow(null, data, '0', idKlienta, idProduktu, idSprzedawcy));
-            Sprzedawcy currentSprzedawca = sprzedawcyRepository.findSprzedawcyByIdPracownika(idSprzedawcy);
+            zakupyProduktowRepository.save(new ZakupyProduktow(null, data, '0', idKlienta, idProduktu,null));
             Produkty currentProdukt = produktyRepository.findByIdProduktu(idProduktu);
-            sprzedawcyRepository.save(new Sprzedawcy(idSprzedawcy,
-                    currentSprzedawca.lacznaSprzedaz()+currentProdukt.cena()*amount,
-                    currentSprzedawca.liczbaTransakcji()+1));
             produktyRepository.save(new Produkty(currentProdukt.idProduktu(),currentProdukt.nazwa(),
                     currentProdukt.cena(),currentProdukt.opis(),currentProdukt.liczbaSztuk()-amount,
                     currentProdukt.czyOferowany(),currentProdukt.idProducenta(), currentProdukt.idSalonu()));

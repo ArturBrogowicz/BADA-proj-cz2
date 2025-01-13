@@ -52,8 +52,8 @@ public class SalesController {
     @PutMapping("/produkty/sell")
     @ResponseStatus(HttpStatus.CREATED)
     public void sellProdukt(@RequestBody SaleRequest saleRequest) {
-        salesService.saleProduktInSalon(saleRequest.idProduktu(),
-                saleRequest.amount(), saleRequest.idSprzedawcy(),
+        salesService.saleProduktOnline(saleRequest.idProduktu(),
+                saleRequest.amount(),
                 saleRequest.data(), saleRequest.idKlienta());
     }
     @ResponseStatus(HttpStatus.CREATED)

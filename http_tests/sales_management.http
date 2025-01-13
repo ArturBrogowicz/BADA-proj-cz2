@@ -2,9 +2,8 @@ PUT http://localhost:8080/sales/produkty/sell
 Content-Type: application/json
 
 {
-  "idProduktu": 1,
+  "idProduktu": 2,
   "amount": 20,
-  "idSprzedawcy": 2,
   "data": "2024-12-28T12:00:00",
   "idKlienta": 1
 }
