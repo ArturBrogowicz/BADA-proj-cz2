@@ -92,7 +92,6 @@ public class PracownicyManagementService {
         ModelePracy model =  modelePracyRepository.findByAttributes(stanowisko,
                 trybPracy, pensja);
         if(model == null) {
-            modelePracyRepository.save(new ModelePracy(null, stanowisko, trybPracy, pensja));
             model =  modelePracyRepository.save(new ModelePracy(null, stanowisko, trybPracy, pensja));
         }
         Pracownicy pracownik = pracownicyRepository.findByIdPracownika(idPracownika);
