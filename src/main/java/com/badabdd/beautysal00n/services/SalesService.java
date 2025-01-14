@@ -42,9 +42,9 @@ public class SalesService {
                 .map(produkt -> {
                     Producenci producent = producenciRepository.findByIdProducenta(produkt.idProducenta());
                     return new ProduktyView(
+                            produkt.idProduktu(),
                             produkt.nazwa(),
                             produkt.cena(),
-                            produkt.opis(),
                             produkt.liczbaSztuk(),
                             producent.nazwa()
                     );
