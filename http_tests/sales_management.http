@@ -1,6 +1,8 @@
 ### Lista wszystkich oferowanych produktów
 GET http://localhost:8080/sales/produkty/list
 
+### Szczegoly konkretnego produktu
+GET http://localhost:8080/sales/produkty/1
 
 ### Zakup produktu online
 PUT http://localhost:8080/sales/produkty/sell

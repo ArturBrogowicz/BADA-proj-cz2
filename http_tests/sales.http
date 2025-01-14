@@ -5,7 +5,7 @@ PUT http://localhost:8080/sales/produkty/delivery/1/56
 PUT http://localhost:8080/sales/uslugi/withdraw/1
 
 ### Withdraw Produkt from offer
-PUT http://localhost:8080/sales/produkty/withdraw/1
+PUT http://localhost:8080/sales/produkty/withdraw/2
 
 ### Add new Produkt to offer
 POST http://localhost:8080/sales/produkty/add
@@ -18,7 +18,7 @@ Content-Type: application/json
   "opis": "Nie wiem po co taki produkt sprzedawać",
   "liczbaSztuk": 42,
   "czyOferowany": "1",
-  "idProducenta": 1,
+  "idProducenta": 2,
   "idSalonu": 1
 }
 

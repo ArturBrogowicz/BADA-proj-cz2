@@ -1,5 +1,6 @@
 package com.badabdd.beautysal00n.services;
 
+import com.badabdd.beautysal00n.dto_views.ProduktyDetailsView;
 import com.badabdd.beautysal00n.dto_views.ProduktyView;
 import com.badabdd.beautysal00n.entities.*;
 import com.badabdd.beautysal00n.repositories.*;
@@ -49,6 +50,11 @@ public class SalesService {
                             producent.nazwa()
                     );
                 }).toList();
+    }
+
+    public ProduktyDetailsView getProduktyDetails(int id) {
+        Produkty produkt = produktyRepository.findByIdProduktu(id);
+        return new ProduktyDetailsView(produkt.nazwa(),produkt.opis());
     }
 
     @Transactional

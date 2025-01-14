@@ -1,5 +1,6 @@
 package com.badabdd.beautysal00n.controllers;
 
+import com.badabdd.beautysal00n.dto_views.ProduktyDetailsView;
 import com.badabdd.beautysal00n.dto_views.ProduktyView;
 import com.badabdd.beautysal00n.dto_views.ReservationRequest;
 import com.badabdd.beautysal00n.dto_views.SaleRequest;
@@ -69,5 +70,10 @@ public class SalesController {
         salesService.reservationOfUsluga(reservationRequest.idUslugi(),
                 reservationRequest.idKlienta(),
                 reservationRequest.data(), reservationRequest.czasTrwania());
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/produkty/{id}")
+    public ProduktyDetailsView getProdukt(@PathVariable Integer id) {
+        return salesService.getProduktyDetails(id);
     }
 }
