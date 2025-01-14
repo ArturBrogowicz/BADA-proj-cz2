@@ -1,5 +1,5 @@
 ### Accept Delivery Produktow
-PUT http://localhost:8080/sales/produkty/delivery/1/56
+PUT http://localhost:8080/sales/produkty/delivery/3/56
 
 ### Withdraw Usluge from offer
 PUT http://localhost:8080/sales/uslugi/withdraw/1

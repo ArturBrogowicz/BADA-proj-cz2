@@ -61,8 +61,7 @@ public class SalesController {
     @ResponseStatus(HttpStatus.CREATED)
     public void sellProdukt(@RequestBody SaleRequest saleRequest) {
         salesService.saleProduktOnline(saleRequest.idProduktu(),
-                saleRequest.amount(),
-                saleRequest.data(), saleRequest.idKlienta());
+                saleRequest.amount(), saleRequest.idKlienta());
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping ("/uslugi/reservation")

@@ -54,7 +54,7 @@ public class SalesService {
 
     public ProduktyDetailsView getProduktyDetails(int id) {
         Produkty produkt = produktyRepository.findByIdProduktu(id);
-        return new ProduktyDetailsView(produkt.nazwa(),produkt.opis());
+        return new ProduktyDetailsView(produkt.nazwa(),produkt.opis(),produkt.liczbaSztuk());
     }
 
     @Transactional
@@ -94,7 +94,7 @@ public class SalesService {
         uslugiRepository.save(withdrawnUsluga);
     }
     @Transactional
-    public void saleProduktOnline(Integer idProduktu, Integer amount, LocalDateTime data, Integer idKlienta) {
+    public void saleProduktOnline(Integer idProduktu, Integer amount, Integer idKlienta) {
         if(produktyRepository.findByIdProduktu(idProduktu) == null) {
             throw new IllegalArgumentException("There is no such produkt");
         } else if (produktyRepository.findByIdProduktu(idProduktu).liczbaSztuk() < amount) {
@@ -102,7 +102,7 @@ public class SalesService {
         } else if (idKlienta == null) {
             // odesłanie do rejestracji klienta
         } else {
-            zakupyProduktowRepository.save(new ZakupyProduktow(null, data, '0', idKlienta, idProduktu,null));
+            zakupyProduktowRepository.save(new ZakupyProduktow(null, LocalDateTime.now(), '0', idKlienta, idProduktu,null));
             Produkty currentProdukt = produktyRepository.findByIdProduktu(idProduktu);
             produktyRepository.save(new Produkty(currentProdukt.idProduktu(),currentProdukt.nazwa(),
                     currentProdukt.cena(),currentProdukt.opis(),currentProdukt.liczbaSztuk()-amount,
