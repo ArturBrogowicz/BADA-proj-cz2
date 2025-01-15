@@ -1,5 +1,6 @@
 ### Wylistuj wszystkich pracowników
 GET http://localhost:8080/admin/pracownicy/list
+Authorization: Basic ZnVmOnBhc3N3b3Jk
 
 ### Zatrudnij nowego pracownika
 POST http://localhost:8080/admin/pracownicy/add

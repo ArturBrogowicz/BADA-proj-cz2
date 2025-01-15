@@ -7,9 +7,10 @@ GET http://localhost:8080/sales/produkty/1
 ### Zakup produktu online
 PUT http://localhost:8080/sales/produkty/sell
 Content-Type: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 {
-  "idProduktu": 3,
+  "idProduktu": 1,
   "amount": 20,
   "idKlienta": 1
 }

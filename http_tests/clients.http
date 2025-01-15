@@ -1,6 +1,7 @@
 ### Register a new Klienta
 POST http://localhost:8080/clients/add
 Content-Type: application/json
+Authorization: Basic dXNlcjpwYXNzd29yZA==
 
 {
   "idKlienta": null,
