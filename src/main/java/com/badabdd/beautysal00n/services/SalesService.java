@@ -1,5 +1,7 @@
 package com.badabdd.beautysal00n.services;
 
+import com.badabdd.beautysal00n.dto_views.ProduktyDetailsView;
+import com.badabdd.beautysal00n.dto_views.ProduktyView;
 import com.badabdd.beautysal00n.entities.*;
 import com.badabdd.beautysal00n.repositories.*;
 import org.springframework.data.relational.core.sql.In;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class SalesService {
@@ -18,11 +21,12 @@ public class SalesService {
     private final WykonanieUslugRepository wykonanieUslugRepository;
     private final RezerwacjeUslugerowRepository rezerwacjeUslugerowRepository;
     private final PracownicyRepository pracownicyRepository;
+    private final ProducenciRepository producenciRepository;
 
     public SalesService(ProduktyRepository produktyRepository, UslugiRepository uslugiRepository,
                         ZakupyProduktowRepository zakupyProduktowRepository, SprzedawcyRepository sprzedawcyRepository,
                         WykonanieUslugRepository wykonanieUslugRepository, RezerwacjeUslugerowRepository rezerwacjeUslugerowRepository,
-                        PracownicyRepository pracownicyRepository) {
+                        PracownicyRepository pracownicyRepository, ProducenciRepository producenciRepository) {
         this.produktyRepository = produktyRepository;
         this.uslugiRepository = uslugiRepository;
         this.zakupyProduktowRepository = zakupyProduktowRepository;
@@ -30,6 +34,27 @@ public class SalesService {
         this.wykonanieUslugRepository = wykonanieUslugRepository;
         this.rezerwacjeUslugerowRepository = rezerwacjeUslugerowRepository;
         this.pracownicyRepository = pracownicyRepository;
+        this.producenciRepository = producenciRepository;
+    }
+
+    public List<ProduktyView> listAllOfferedProdukty() {
+        List<Produkty> produkty = produktyRepository.findAll();
+        return produkty.stream().filter(produkt -> produkt.czyOferowany() == '1')
+                .map(produkt -> {
+                    Producenci producent = producenciRepository.findByIdProducenta(produkt.idProducenta());
+                    return new ProduktyView(
+                            produkt.idProduktu(),
+                            produkt.nazwa(),
+                            produkt.cena(),
+                            produkt.liczbaSztuk(),
+                            producent.nazwa()
+                    );
+                }).toList();
+    }
+
+    public ProduktyDetailsView getProduktyDetails(int id) {
+        Produkty produkt = produktyRepository.findByIdProduktu(id);
+        return new ProduktyDetailsView(produkt.nazwa(),produkt.opis(),produkt.liczbaSztuk());
     }
 
     @Transactional
@@ -69,7 +94,7 @@ public class SalesService {
         uslugiRepository.save(withdrawnUsluga);
     }
     @Transactional
-    public void saleProduktInSalon(Integer idProduktu, Integer amount, Integer idSprzedawcy, LocalDateTime data, Integer idKlienta) {
+    public void saleProduktOnline(Integer idProduktu, Integer amount, Integer idKlienta) {
         if(produktyRepository.findByIdProduktu(idProduktu) == null) {
             throw new IllegalArgumentException("There is no such produkt");
         } else if (produktyRepository.findByIdProduktu(idProduktu).liczbaSztuk() < amount) {
@@ -77,12 +102,8 @@ public class SalesService {
         } else if (idKlienta == null) {
             // odesłanie do rejestracji klienta
         } else {
-            zakupyProduktowRepository.save(new ZakupyProduktow(null, data, '0', idKlienta, idProduktu, idSprzedawcy));
-            Sprzedawcy currentSprzedawca = sprzedawcyRepository.findSprzedawcyByIdPracownika(idSprzedawcy);
+            zakupyProduktowRepository.save(new ZakupyProduktow(null, LocalDateTime.now(), '0', idKlienta, idProduktu,null));
             Produkty currentProdukt = produktyRepository.findByIdProduktu(idProduktu);
-            sprzedawcyRepository.save(new Sprzedawcy(idSprzedawcy,
-                    currentSprzedawca.lacznaSprzedaz()+currentProdukt.cena()*amount,
-                    currentSprzedawca.liczbaTransakcji()+1));
             produktyRepository.save(new Produkty(currentProdukt.idProduktu(),currentProdukt.nazwa(),
                     currentProdukt.cena(),currentProdukt.opis(),currentProdukt.liczbaSztuk()-amount,
                     currentProdukt.czyOferowany(),currentProdukt.idProducenta(), currentProdukt.idSalonu()));

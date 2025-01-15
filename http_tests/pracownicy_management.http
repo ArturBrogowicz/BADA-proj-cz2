@@ -6,17 +6,17 @@ POST http://localhost:8080/admin/pracownicy/add
 Content-Type: application/json
 
 {
-  "imie": "Jan",
-  "nazwisko": "Kowalski",
-  "pesel": "12345678901",
-  "miasto": "Warszawa",
-  "ulica": "Srebrna",
-  "kodPocztowy": "00-001",
-  "nrBudynku": 10,
-  "nrLokalu": 5,
+  "imie": "Fufuk",
+  "nazwisko": "Gnufuk",
+  "pesel": "12345678123",
+  "miasto": "Gdańsk",
+  "ulica": "Florna",
+  "kodPocztowy": "81-471",
+  "nrBudynku": 102,
+  "nrLokalu": 74,
   "stanowisko": "usluger",
   "trybPracy": "pol etatu",
-  "pensja": 7500.50
+  "pensja": 5000
 }
 
 
@@ -31,8 +31,10 @@ PUT http://localhost:8080/admin/pracownicy/update_model
 Content-Type: application/json
 
 {
+  "idPracownika": 48,
   "stanowisko": "sprzedawca",
-  "idPracownika": 1
+  "trybPracy": "cwierc etatu",
+  "pensja": 1000.5
 }
 
 ### Dodaj model pracy

@@ -1,5 +1,7 @@
 package com.badabdd.beautysal00n.controllers;
 
+import com.badabdd.beautysal00n.dto_views.ProduktyDetailsView;
+import com.badabdd.beautysal00n.dto_views.ProduktyView;
 import com.badabdd.beautysal00n.dto_views.ReservationRequest;
 import com.badabdd.beautysal00n.dto_views.SaleRequest;
 import com.badabdd.beautysal00n.entities.Produkty;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/sales")
@@ -18,6 +21,11 @@ public class SalesController {
 
     public SalesController(SalesService salesService) {
         this.salesService = salesService;
+    }
+
+    @GetMapping("/produkty/list")
+    public List<ProduktyView> listAllOfferedProdukty() {
+        return salesService.listAllOfferedProdukty();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -52,9 +60,8 @@ public class SalesController {
     @PutMapping("/produkty/sell")
     @ResponseStatus(HttpStatus.CREATED)
     public void sellProdukt(@RequestBody SaleRequest saleRequest) {
-        salesService.saleProduktInSalon(saleRequest.idProduktu(),
-                saleRequest.amount(), saleRequest.idSprzedawcy(),
-                saleRequest.data(), saleRequest.idKlienta());
+        salesService.saleProduktOnline(saleRequest.idProduktu(),
+                saleRequest.amount(), saleRequest.idKlienta());
     }
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping ("/uslugi/reservation")
@@ -62,5 +69,10 @@ public class SalesController {
         salesService.reservationOfUsluga(reservationRequest.idUslugi(),
                 reservationRequest.idKlienta(),
                 reservationRequest.data(), reservationRequest.czasTrwania());
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/produkty/{id}")
+    public ProduktyDetailsView getProdukt(@PathVariable Integer id) {
+        return salesService.getProduktyDetails(id);
     }
 }

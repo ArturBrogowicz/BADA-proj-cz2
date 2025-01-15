@@ -10,7 +10,7 @@ public record Producenci(
         String nazwa,
         @NotBlank
         String kodKraju,
-        String email,
+        String adresEmail,
         String opis
 ) {
 }
